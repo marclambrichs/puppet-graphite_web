@@ -1,0 +1,21 @@
+## MAC OS
+.DS_Store
+
+## EMACS
+*~
+\#*
+.\#*
+
+## VIM
+*.swp
+tags
+
+pkg/
+
+RELEASE
+.bundle
+Gemfile.lock
+vendor/
+
+spec/fixtures/manifests
+spec/fixtures/modules

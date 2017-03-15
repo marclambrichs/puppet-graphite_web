@@ -1,0 +1,31 @@
+
+#####################################
+# Filesystem Paths #
+#####################################
+
+CONF_DIR	= '<%= @config_dir %>'
+DASHBOARD_CONF	= '<%= @config_dir %>/dashboard.conf'
+GRAPHITE_ROOT	= '<%= @graphite_root %>'
+INDEX_FILE	= '<%= @index_file %>'
+LOG_DIR		= '<%= @log_dir %>'
+STORAGE_DIR	= '<%= @storage_dir %>'
+WHISPER_DIR	= '<%= @whisper_dir %>'
+
+#STATIC_ROOT = '/opt/graphite/static'
+# To further or fully customize the paths, modify the following. Note that the
+# default settings for each of these are relative to CONF_DIR and STORAGE_DIR
+#
+## Webapp config files
+
+#GRAPHTEMPLATES_CONF = '/opt/graphite/conf/graphTemplates.conf'
+
+## Data directories
+#
+# NOTE: If any directory is unreadable in STANDARD_DIRS it will break metric browsing
+#
+#CERES_DIR = '/opt/graphite/storage/ceres'
+
+#RRD_DIR = '/opt/graphite/storage/rrd'
+#
+# Data directories using the "Standard" metrics finder (i.e. not Ceres)
+#STANDARD_DIRS = [WHISPER_DIR, RRD_DIR] # Default: set from the above variables

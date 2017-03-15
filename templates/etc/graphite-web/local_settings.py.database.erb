@@ -1,0 +1,15 @@
+
+##########################
+# Database Configuration #
+##########################
+
+DATABASES = {
+<% @databases.each do |db, settings| -%>
+  '<%= db %>': {
+  <% settings.each do |key, value| -%>
+    '<%= key.upcase %>': '<%= value %>',
+  <% end -%>
+<% end -%>
+  }
+}
+

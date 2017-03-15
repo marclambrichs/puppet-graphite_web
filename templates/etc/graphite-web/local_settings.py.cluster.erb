@@ -1,0 +1,61 @@
+
+#########################
+# Cluster Configuration #
+#########################
+CARBONLINK_HASHING_TYPE	 = '<%= @carbonlink_hashing_type %>'
+CARBONLINK_RETRY_DELAY	 = <%= @carbonlink_retry_delay %> # Seconds to blacklist a failed remote server
+CARBONLINK_TIMEOUT	 = <%= @carbonlink_timeout %>
+CARBON_METRIC_PREFIX	 = '<%= @carbon_metric_prefix %>'
+CARBPONLINK_HOSTS	 = ["<%= @carbon_caches.keys().map{ |cache| "127.0.0.1:#{@carbon_caches[cache]['cache_query_port']}:#{cache}" }.join( "\", \"" ) %>"]
+REPLICATION_FACTOR	 = <%= @replication_factor %>
+
+# This should list the IP address (and optionally port) of the webapp on each
+# remote server in the cluster. These servers must each have local access to
+# metric data. Note that the first server to return a match for a query will be
+# used.
+#CLUSTER_SERVERS = ["10.0.2.2:80", "10.0.2.3:80"]
+
+# This setting controls whether https is used to communicate between cluster members
+#INTRACLUSTER_HTTPS = False
+
+# These are timeout values (in seconds) for requests to remote webapps
+#REMOTE_FIND_TIMEOUT = 3.0           # Timeout for metric find requests
+#REMOTE_FETCH_TIMEOUT = 3.0          # Timeout to fetch series data
+#REMOTE_RETRY_DELAY = 60.0           # Time before retrying a failed remote webapp
+
+# Try to detect when a cluster server is localhost and don't forward queries
+#REMOTE_EXCLUDE_LOCAL = False
+
+# Number of retries for a specific remote data fetch.
+#MAX_FETCH_RETRIES = 2
+
+#FIND_CACHE_DURATION = 300           # Time to cache remote metric find results
+# If the query doesn't fall entirely within the FIND_TOLERANCE window
+# we disregard the window. This prevents unnecessary remote fetches
+# caused when carbon's cache skews node.intervals, giving the appearance
+# remote systems have data we don't have locally, which we probably do.
+#FIND_TOLERANCE = 2 * FIND_CACHE_DURATION
+
+# During a rebalance of a consistent hash cluster, after a partition event on a replication > 1 cluster,
+# or in other cases we might receive multiple TimeSeries data for a metric key.  Merge them together rather
+# that choosing the "most complete" one (pre-0.9.14 behaviour).
+#REMOTE_STORE_MERGE_RESULTS = True
+
+# Provide a list of HTTP headers that you want forwarded on from this host
+# when making a request to a remote webapp server in CLUSTER_SERVERS
+#REMOTE_STORE_FORWARD_HEADERS = [] # An iterable of HTTP header names
+
+## Remote rendering settings
+# Set to True to enable rendering of Graphs on a remote webapp
+#REMOTE_RENDERING = True
+# List of IP (and optionally port) of the webapp on each remote server that
+# will be used for rendering. Note that each rendering host should have local
+# access to metric data or should have CLUSTER_SERVERS configured
+#RENDERING_HOSTS = []
+#REMOTE_RENDER_CONNECT_TIMEOUT = 1.0
+
+# A "keyfunc" is a user-defined python function that is given a metric name
+# and returns a string that should be used when hashing the metric name.
+# This is important when your hashing has to respect certain metric groupings.
+#CARBONLINK_HASHING_KEYFUNC = "/opt/graphite/bin/keyfuncs.py:my_keyfunc"
+
