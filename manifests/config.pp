@@ -9,7 +9,6 @@ class graphite_web::config (
   $databases                      = $::graphite_web::config_databases,
   $database_engine                = 'postgresql',
   $date_format                    = $::graphite_web::config_date_format,
-  $db_file                        = $::graphite_web::db_file,
   $debug                          = $::graphite_web::config_debug,
   $graphite_root                  = $::graphite_web::config_graphite_root,
   $index_file                     = $::graphite_web::config_index_file,

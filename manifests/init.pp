@@ -79,7 +79,7 @@ class graphite_web (
 ) inherits graphite_web::params {
 
   member( ['carbon_ch', 'fnv1a_ch'], $config_carbonlink_hashing_type )
-  member( ['mysql', 'oracle', 'postgresql', 'sqlite3'], $database_engine )
+  member( ['mysql', 'oracle', 'postgresql', 'sqlite3'], $config_database_engine )
 
   anchor { 'graphite_web::begin': } ->
   class { '::graphite_web::install': } ->
