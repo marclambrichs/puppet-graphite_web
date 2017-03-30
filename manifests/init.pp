@@ -51,7 +51,7 @@ class graphite_web (
   $config_carbonlink_hashing_type        = $::graphite_web::params::config_carbonlink_hashing_type,
   $config_carbonlink_retry_delay         = $::graphite_web::params::config_carbonlink_retry_delay,
   $config_carbonlink_timeout             = $::graphite_web::params::config_carbonlink_timeout,
-  $config_database_engine                = $::graphite_web::params::config_database_engine,  
+  $config_database_engine                = $::graphite_web::params::config_database_engine,
   $config_databases                      = $::graphite_web::params::config_databases,
   $config_date_format                    = $::graphite_web::params::config_date_format,
   $config_debug                          = $::graphite_web::params::config_debug,
@@ -65,7 +65,7 @@ class graphite_web (
   $config_log_rotation_count             = $::graphite_web::params::config_log_rotation_count,
   $config_max_tag_length                 = $::graphite_web::params::config_max_tag_length,
   $config_replication_factor             = $::graphite_web::params::config_replication_factor,
-  $config_secret_key                     = $::graphite_web::params::config_secret_key,  
+  $config_secret_key                     = $::graphite_web::params::config_secret_key,
   $config_storage_dir                    = $::graphite_web::params::config_storage_dir,
   $config_time_zone                      = $::graphite_web::params::config_time_zone,
   $config_url_prefix                     = $::graphite_web::params::config_url_prefix,
@@ -81,9 +81,9 @@ class graphite_web (
   member( ['carbon_ch', 'fnv1a_ch'], $config_carbonlink_hashing_type )
   member( ['mysql', 'oracle', 'postgresql', 'sqlite3'], $config_database_engine )
 
-  anchor { 'graphite_web::begin': } ->
-  class { '::graphite_web::install': } ->
-  class { '::graphite_web::config': } ->
-  anchor { 'graphite_web::end': }
+  anchor { 'graphite_web::begin': }
+  -> class { '::graphite_web::install': }
+  -> class { '::graphite_web::config': }
+  -> anchor { 'graphite_web::end': }
 
 }

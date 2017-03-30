@@ -6,7 +6,7 @@ class graphite_web::install (
   $graphite_web_ensure = $::graphite_web::graphite_web_ensure,
   $graphite_web_pkgs   = $::graphite_web::graphite_web_pkgs,
   $log_dir             = $::graphite_web::config_log_dir,
-  $user                = $::graphite_web::user,  
+  $user                = $::graphite_web::user,
 ) {
 
   if $manage_pkg {
@@ -17,17 +17,16 @@ class graphite_web::install (
 
   group { $group:
     ensure => present,
-  } ->
-
-  user { $user:
+  }
+  -> user { $user:
     ensure => 'present',
     groups => $group,
     shell  => '/sbin/nologin',
   }
 
   file { $log_dir:
-    path    => $log_dir,
     ensure  => directory,
+    path    => $log_dir,
     owner   => $user,
     group   => $group,
     mode    => '0755',
@@ -35,34 +34,34 @@ class graphite_web::install (
   }
 
   file { $graphite_root:
-    path => $graphite_root,
     ensure => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-  }
-
-  file { 'storage_dir':
-    path    => "${graphite_root}/storage",
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => File[$graphite_root],    
-  }
-
-  file { 'webapp_dir':
-    path   => "${graphite_root}/webapp",
-    ensure => directory,
+    path   => $graphite_root,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
+  }
+
+  file { 'storage_dir':
+    ensure  => directory,
+    path    => "${graphite_root}/storage",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File[$graphite_root],
+  }
+
+  file { 'webapp_dir':
+    ensure  => directory,
+    path    => "${graphite_root}/webapp",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
     require => File[$graphite_root],
   }
 
   file { 'index_file':
-    path    => "${graphite_root}/webapp/index",
     ensure  => file,
+    path    => "${graphite_root}/webapp/index",
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
