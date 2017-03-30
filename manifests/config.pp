@@ -26,21 +26,21 @@ class graphite_web::config (
   $use_remote_user_authentication = $::graphite_web::config_use_remote_user_authentication,
   $whisper_dir                    = $::graphite_web::config_whisper_dir,
 ) {
-    
+
   $config_file = "${config_dir}/local_settings.py"
 
   file { $config_dir:
-    path   => $config_dir,
     ensure => directory,
+    path   => $config_dir,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
   }
-  
+
   concat { $config_file:
     owner => 'root',
     group => 'root',
-    mode => '0644',
+    mode  => '0644',
   }
 
   ###
@@ -60,7 +60,7 @@ class graphite_web::config (
     content => template('graphite_web/etc/graphite-web/local_settings.py.filesystem.erb'),
     order   => '02',
   }
-  
+
   ###
   ### local_settings.py - email configuration
   ###
@@ -80,7 +80,7 @@ class graphite_web::config (
     target  => $config_file,
     content => template('graphite_web/etc/graphite-web/local_settings.py.database.erb'),
     order   => '07',
-  }  
+  }
 
   ###
   ### local_settings.py - cluster configuration
@@ -89,8 +89,8 @@ class graphite_web::config (
     target  => $config_file,
     content => template('graphite_web/etc/graphite-web/local_settings.py.cluster.erb'),
     order   => '08',
-  }  
-  
+  }
+
   ###
   ### local_settings.py - additional django settings
   ###
@@ -100,11 +100,11 @@ class graphite_web::config (
       package { 'python-psycopg2':
         ensure => installed,
       }
-      
+
       exec { 'fill postgresql database':
-        command     => '/bin/graphite-manage syncdb --noinput',
-        cwd         => "${graphite_root}/webapp",
-        require     => [Concat::Fragment['graphite_web config database configuration'],
+        command => '/bin/graphite-manage syncdb --noinput',
+        cwd     => "${graphite_root}/webapp",
+        require => [Concat::Fragment['graphite_web config database configuration'],
                         Package['python-psycopg2']]
       }
     }
@@ -113,9 +113,9 @@ class graphite_web::config (
         command     => 'graphite-manage syncdb --noinput',
         environment => 'PYTHONPATH=/usr/share/graphite/webapp',
         creates     => "${graphite_root}/storage/graphite.db",
-        refreshonly => true,        
+        refreshonly => true,
         require     => Concat[$config_file],
       }
     }
   }
-}  
+}

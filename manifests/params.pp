@@ -26,7 +26,7 @@ class graphite_web::params {
   $config_graphite_root                   = '/var/lib/graphite-web'
   $config_index_file                      = '/var/lib/graphite-web/webapp/index'
   $config_log_cache_performance           = 'True'
-  $config_log_dir                         = '/var/log/graphite-web'    
+  $config_log_dir                         = '/var/log/graphite-web'
   $config_log_rendering_performance       = 'True'
   $config_log_rotation                    = 'True'
   $config_log_rotation_count              = 1
@@ -43,4 +43,4 @@ class graphite_web::params {
   $group                                  = 'graphite-web'
   $manage_pkg                             = true
   $user                                   = 'graphite-web'
-}  
+}
