@@ -5,8 +5,8 @@
   "summary": "Installs, configures and manages graphite web.",
   "license": "Apache-2.0",
   "source": "",
-  "project_page": null,
-  "issues_url": null,
+  "project_page": "https://github.com/marclambrichs/puppet-graphite_web",
+  "issues_url": "https://github.com/marclambrichs/puppet-graphite_web/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
