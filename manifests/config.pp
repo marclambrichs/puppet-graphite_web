@@ -104,6 +104,7 @@ class graphite_web::config (
       exec { 'fill postgresql database':
         command => '/bin/graphite-manage syncdb --noinput',
         cwd     => "${graphite_root}/webapp",
+        unless  => "/bin/bash -c '[[ $(graphite-manage inspectdb | wc -l) -gt 13 ]]'",
         require => [Concat::Fragment['graphite_web config database configuration'],
                         Package['python-psycopg2']]
       }
