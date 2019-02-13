@@ -1,17 +1,25 @@
 class graphite_web::install (
-  $group               = $::graphite_web::group,
-  $index_file          = $::graphite_web::config_index_file,
-  $manage_pkg          = $::graphite_web::manage_pkg,
-  $graphite_root       = $::graphite_web::config_graphite_root,
-  $graphite_web_ensure = $::graphite_web::graphite_web_ensure,
-  $graphite_web_pkgs   = $::graphite_web::graphite_web_pkgs,
-  $log_dir             = $::graphite_web::config_log_dir,
-  $user                = $::graphite_web::user,
+  $group                   = $::graphite_web::group,
+  $index_file              = $::graphite_web::config_index_file,
+  $manage_pkg              = $::graphite_web::manage_pkg,
+  $graphite_root           = $::graphite_web::config_graphite_root,
+  $graphite_web_ensure     = $::graphite_web::graphite_web_ensure,
+  $graphite_web_pkgs       = $::graphite_web::graphite_web_pkgs,
+  $log_dir                 = $::graphite_web::config_log_dir,
+  $memcached_enabled       = $::graphite_web::memcached_enabled,
+  $memcached_python_ensure = $::graphite_web::memcached_python_ensure,
+  $memcached_python_pkgs   = $::graphite_web::memcached_python_pkgs,
+  $user                    = $::graphite_web::user,
 ) {
 
   if $manage_pkg {
     package { $graphite_web_pkgs:
       ensure => $graphite_web_ensure,
+    }
+    if $memcached_enabled {
+      package { $memcached_python_pkgs:
+        ensure => $memcached_python_ensure,
+      }
     }
   }
 
